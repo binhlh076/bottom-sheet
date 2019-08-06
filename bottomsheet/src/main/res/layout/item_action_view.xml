@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:padding="13dp"
+                android:id="@+id/item_action"
+                android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_left"
+            tools:visibility="visible"
+            android:visibility="gone"
+            android:layout_width="30dp"
+            tools:background="@android:color/black"
+            android:layout_height="30dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center"
+            android:id="@+id/tv_action_button"
+            tools:text="Action butotn 1"
+            android:fontFamily="@font/bold"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+</RelativeLayout>
