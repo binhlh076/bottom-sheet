@@ -12,5 +12,5 @@ class ActionItem(
     var textSize: Int? = null,
     var tag: String? = null,
     var action: ((ActionItem?) -> Unit)? = null,
-    @FontRes var typeface: Int?
+    @FontRes var typeface: Int? = null
 ) : Serializable

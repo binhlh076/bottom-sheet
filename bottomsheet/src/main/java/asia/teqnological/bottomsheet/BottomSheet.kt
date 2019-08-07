@@ -2,6 +2,7 @@ package asia.teqnological.bottomsheet
 
 import android.content.DialogInterface
 import android.view.animation.Animation
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import asia.teqnological.bottomsheet.dialog.BottomSheetDialog
 import asia.teqnological.bottomsheet.model.ActionItem
@@ -42,13 +43,21 @@ class BottomSheet : BaseBottomSheet, DialogInterface.OnDismissListener {
 
     override fun show() {
         activity?.supportFragmentManager?.apply {
-            bottomSheetDialog.show(this, "bottom_sheet_dialog")
+            if (actionItems == null || actionItems.isNullOrEmpty()) {
+                Toast.makeText(activity, "Missing Action Items..", Toast.LENGTH_SHORT).show()
+            } else {
+                bottomSheetDialog.show(this, "bottom_sheet_dialog")
+            }
         }
     }
 
     override fun show(animation: Animation) {
         activity?.supportFragmentManager?.apply {
-            bottomSheetDialog.show(this, "bottom_sheet_dialog")
+            if (actionItems == null || actionItems.isNullOrEmpty()) {
+                Toast.makeText(activity, "Missing Action Items..", Toast.LENGTH_SHORT).show()
+            } else {
+                bottomSheetDialog.show(this, "bottom_sheet_dialog")
+            }
         }
     }
 

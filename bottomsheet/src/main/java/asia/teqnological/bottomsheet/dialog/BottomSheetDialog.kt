@@ -112,7 +112,7 @@ class BottomSheetDialog : BaseDialogFragment() {
 
 
     private fun createDivider(divider: BottomSheetDivider? = null): View {
-        val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1)
+        val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, divider?.height ?: 1)
         val view = LayoutInflater.from(context).inflate(R.layout.item_divider_view, null)
         view.layoutParams = lp
         divider?.apply {
