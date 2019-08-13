@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.FragmentManager
 import asia.teqnological.bottomsheet.R
 import asia.teqnological.bottomsheet.model.ActionItem
 import asia.teqnological.bottomsheet.model.BottomSheetDivider
@@ -31,10 +30,10 @@ class BottomSheetDialog : BaseDialogFragment() {
         const val TITLE_ITEM = "TITLE"
 
         fun getInstance(
-            actionItems: ArrayList<ActionItem>? = null,
-            cancelItem: ActionItem? = null,
-            title: BottomSheetTitle? = null,
-            divider: BottomSheetDivider? = null
+                actionItems: ArrayList<ActionItem>? = null,
+                cancelItem: ActionItem? = null,
+                title: BottomSheetTitle? = null,
+                divider: BottomSheetDivider? = null
         ): BottomSheetDialog {
             val dialog = BottomSheetDialog()
             val bundle = Bundle()
@@ -74,6 +73,7 @@ class BottomSheetDialog : BaseDialogFragment() {
                     return@run ResourcesCompat.getFont(context, this)
                 }
                 text = it.text
+                textSize = it.textSize ?: 14f
             }
             setOnClickListener {
                 cancelItem?.action?.invoke(cancelItem)
@@ -84,7 +84,7 @@ class BottomSheetDialog : BaseDialogFragment() {
 
     private fun setupListActionItem() {
         val lp =
-            LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         view?.findViewById<LinearLayout>(R.id.layout_top)?.apply {
             actionItems?.let { items ->
                 when (items.size) {
@@ -112,7 +112,8 @@ class BottomSheetDialog : BaseDialogFragment() {
 
 
     private fun createDivider(divider: BottomSheetDivider? = null): View {
-        val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, divider?.height ?: 1)
+        val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, divider?.height
+                ?: 1)
         val view = LayoutInflater.from(context).inflate(R.layout.item_divider_view, null)
         view.layoutParams = lp
         divider?.apply {
@@ -130,6 +131,7 @@ class BottomSheetDialog : BaseDialogFragment() {
                 return@run ResourcesCompat.getFont(context, this)
             }
             text = actionItem.text
+            textSize = actionItem.textSize ?: 14f
             setTextColor(ResourcesCompat.getColor(resources, actionItem.color, null))
         }
         val res = when (position) {
@@ -151,7 +153,7 @@ class BottomSheetDialog : BaseDialogFragment() {
             val drawable = resources.getDrawable(res) as RippleDrawable?
             drawable?.mutate()
             (drawable?.getDrawable(0)?.mutate() as GradientDrawable?)?.color =
-                ColorStateList.valueOf(resources.getColor(this@apply))
+                    ColorStateList.valueOf(resources.getColor(this@apply))
             view.item_action?.setBackgroundDrawable(drawable)
         }
         view.setOnClickListener {
@@ -160,11 +162,5 @@ class BottomSheetDialog : BaseDialogFragment() {
         }
         view.tag = actionItem.tag
         return view
-    }
-
-    override fun show(manager: FragmentManager?, tag: String?) {
-//        if (!isAdded && activity != null && activity?.isFinishing == false) {
-        super.show(manager, tag)
-//        }
     }
 }

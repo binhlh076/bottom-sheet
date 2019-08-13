@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun createListAction(): ArrayList<ActionItem> {
         val list = arrayListOf<ActionItem>()
-        for (i in 0..3) {
+        for (i in 0..1) {
             list.add(ActionItem("Action button $i", tag = "Action button $i", action = {
                 Toast.makeText(this, it?.tag, Toast.LENGTH_SHORT).show()
             }))

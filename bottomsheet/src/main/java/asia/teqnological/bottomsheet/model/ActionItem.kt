@@ -9,7 +9,7 @@ class ActionItem(
     var text: String,
     @ColorRes var color: Int = R.color.black,
     @ColorRes var background: Int = R.color.white,
-    var textSize: Int? = null,
+    var textSize: Float? = null,
     var tag: String? = null,
     var action: ((ActionItem?) -> Unit)? = null,
     @FontRes var typeface: Int? = null
