@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">bottom-sheet</string>
+    <string name="click_to_show_dialog">Click to show dialog!</string>
+</resources>
