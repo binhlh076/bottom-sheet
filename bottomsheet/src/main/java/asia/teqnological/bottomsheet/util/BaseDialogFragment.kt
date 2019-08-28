@@ -13,7 +13,6 @@ abstract class BaseDialogFragment : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_TITLE, R.style.Theme_CustomDialog)
-        isCancelable = false
     }
 
     override fun onStart() {
@@ -24,7 +23,7 @@ abstract class BaseDialogFragment : DialogFragment() {
         display?.getSize(size)
         val width = size.x
         val params = window.attributes
-        params.width = width * 4 / 5
+        params.width = width * 8 / 9
         params.height = WindowManager.LayoutParams.WRAP_CONTENT
         window.attributes = params
         window.setGravity(Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM)

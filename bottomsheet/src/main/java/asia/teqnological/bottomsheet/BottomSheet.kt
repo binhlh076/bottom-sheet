@@ -95,6 +95,14 @@ class BottomSheet : BaseBottomSheet, DialogInterface.OnDismissListener {
             return this
         }
 
+        fun setActionItems(vararg actionItems: ActionItem): Builder {
+            this.actionItems = arrayListOf()
+            actionItems.forEach {
+                this@Builder.actionItems?.add(it)
+            }
+            return this
+        }
+
         fun setCancelItem(cancelItem: ActionItem?): Builder {
             this.cancelItem = cancelItem
             return this

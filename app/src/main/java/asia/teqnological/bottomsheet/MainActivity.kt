@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import asia.teqnological.bottomsheet.model.ActionItem
-import asia.teqnological.bottomsheet.model.BottomSheetDivider
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val bottomSheet = BottomSheet.Builder(this)
-            .setActionItems(createListAction()).build()
+            .setActionItems(ActionItem("Finish"),
+                ActionItem("Finish")).build()
         btn_open?.setOnClickListener {
             bottomSheet.show()
         }
