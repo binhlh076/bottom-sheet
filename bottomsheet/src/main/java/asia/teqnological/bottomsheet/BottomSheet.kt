@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.view.animation.Animation
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import asia.teqnological.bottomsheet.dialog.BottomSheetDialog
 import asia.teqnological.bottomsheet.model.ActionItem
 import asia.teqnological.bottomsheet.model.BottomSheetDivider
@@ -20,13 +21,13 @@ class BottomSheet : BaseBottomSheet, DialogInterface.OnDismissListener {
     }
 
     private constructor(
-        activity: AppCompatActivity?,
+        fragmentManager: FragmentManager?,
         actionItems: ArrayList<ActionItem>?,
         cancelItem: ActionItem? = null,
         bottomSheetTitle: BottomSheetTitle?,
         bottomSheetDivider: BottomSheetDivider?
     ) : super(
-        activity,
+        fragmentManager,
         actionItems, cancelItem, bottomSheetTitle, bottomSheetDivider
     ) {
 
@@ -42,9 +43,9 @@ class BottomSheet : BaseBottomSheet, DialogInterface.OnDismissListener {
     }
 
     override fun show() {
-        activity?.supportFragmentManager?.apply {
+        fragmentManager?.apply {
             if (actionItems == null || actionItems.isNullOrEmpty()) {
-                Toast.makeText(activity, "Missing Action Items..", Toast.LENGTH_SHORT).show()
+                throw Throwable("Missing Action Items..")
             } else {
                 bottomSheetDialog.show(this, "bottom_sheet_dialog")
             }
@@ -52,9 +53,9 @@ class BottomSheet : BaseBottomSheet, DialogInterface.OnDismissListener {
     }
 
     override fun show(animation: Animation) {
-        activity?.supportFragmentManager?.apply {
+        fragmentManager.apply {
             if (actionItems == null || actionItems.isNullOrEmpty()) {
-                Toast.makeText(activity, "Missing Action Items..", Toast.LENGTH_SHORT).show()
+                throw Throwable("Missing Action Items..")
             } else {
                 bottomSheetDialog.show(this, "bottom_sheet_dialog")
             }
@@ -70,19 +71,19 @@ class BottomSheet : BaseBottomSheet, DialogInterface.OnDismissListener {
     }
 
     open class Builder {
-        private var activity: AppCompatActivity? = null
+        private var fragmentManager: FragmentManager? = null
         private var actionItems: ArrayList<ActionItem>? = null
         private var cancelItem: ActionItem? = null
         private var title: BottomSheetTitle? = null
         private var divider: BottomSheetDivider? = null
         private var titleFont: BottomSheetEnums.Font? = null
 
-        constructor(activity: AppCompatActivity?) {
-            this.activity = activity
+        constructor(activity: FragmentManager?) {
+            this.fragmentManager = activity
         }
 
         constructor(bottomSheet: BottomSheet) {
-            this.activity = bottomSheet.activity
+            this.fragmentManager = bottomSheet.fragmentManager
             this.actionItems = bottomSheet.actionItems
             this.cancelItem = bottomSheet.cancelItem
             this.title = bottomSheet.title
@@ -119,7 +120,7 @@ class BottomSheet : BaseBottomSheet, DialogInterface.OnDismissListener {
         }
 
         fun build(): BottomSheet {
-            return BottomSheet(activity, actionItems, cancelItem, title, divider)
+            return BottomSheet(fragmentManager, actionItems, cancelItem, title, divider)
         }
     }
 }

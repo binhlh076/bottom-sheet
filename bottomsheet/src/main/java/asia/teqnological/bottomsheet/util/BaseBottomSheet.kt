@@ -2,13 +2,14 @@ package asia.teqnological.bottomsheet.util
 
 import android.view.animation.Animation
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import asia.teqnological.bottomsheet.model.ActionItem
 import asia.teqnological.bottomsheet.model.BottomSheetDivider
 import asia.teqnological.bottomsheet.model.BottomSheetTitle
 import java.lang.ref.WeakReference
 
 abstract class BaseBottomSheet {
-    protected var activity: AppCompatActivity? = null
+    protected var fragmentManager: FragmentManager? = null
     protected var actionItems: ArrayList<ActionItem>? = null
     protected var cancelItem: ActionItem? = null
     protected var title: BottomSheetTitle? = null
@@ -16,14 +17,14 @@ abstract class BaseBottomSheet {
     protected var titleFont: BottomSheetEnums.Font? = null
 
     constructor(
-        activity: AppCompatActivity? = null,
+        fragmentManager: FragmentManager? = null,
         actionItems: ArrayList<ActionItem>? = null,
         cancelItem: ActionItem? = null,
         title: BottomSheetTitle? = null,
         divider: BottomSheetDivider? = null,
         titleFont: BottomSheetEnums.Font? = null
     ) {
-        this.activity = WeakReference<AppCompatActivity>(activity).get()
+        this.fragmentManager = fragmentManager
         this.actionItems = actionItems
         this.cancelItem = cancelItem
         this.title = title
